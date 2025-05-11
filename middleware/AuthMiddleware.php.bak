@@ -1,0 +1,68 @@
+<?php
+
+// autoload es una función de Composer que carga automáticamente las clases que podemos usar en nuestro proyecto
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Importar la clase JWT de la biblioteca Firebase\JWT
+use Firebase\JWT\JWT;
+
+// Firebase\JWT\Key se utiliza para verificar la firma del token JWT y para decodificar el token utilizando la clave secreta
+use Firebase\JWT\Key;
+
+// Tarea1: Que ya considere el payload
+/*
+{
+    "sub": 1234567890,
+    "name": "John Doe",
+    "iat": 1516239022,
+    "exp": 1516242622
+}
+*/
+
+class AuthMiddleware {
+    
+    private static $secretKey = "TJ0k0Maod8aWRyE2cxogvcXHm0rD4tnArm/2GlPYoIz4jThfMMLvML8bgCgz7FBShNZfJ12EVrQVfBJOsyGksyKI4fX8CW2GzB5b+LBv6x6RbCjlD40qzP/nW5xJG3kKx5LULX+GiDQB6m9qsL3bsTzy8Z4D3SI7puEB8K+JiDg=";
+
+    /**
+     * Verifica el token JWT en la solicitud.
+     * Si el token es válido, retorna el payload decodificado.
+     * Si el token no es válido, retorna un error 403 Forbidden.
+     * Si el token no está presente, retorna un error 401 Unauthorized.
+     */
+    public static function verificarToken() {
+
+        // Obtener los encabezados de la solicitud
+        $headers = apache_request_headers(); 
+
+        // Verificar si el encabezado Authorization está presente
+        if (!isset($headers['Authorization'])) {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(["error" => "Token no proporcionado"]);
+            exit;
+        }
+        
+        // Obtener el encabezado Authorization
+        $authHeader = $headers['Authorization'];
+
+        // Extraer el token del encabezado Authorization
+        $token = str_replace('Bearer ', '', $authHeader);
+
+        try {
+            // Decodificar el token JWT
+            $decoded = JWT::decode($token, new Key(self::$secretKey, 'HS256'));
+            
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            // Si el token ha expirado, retornar un error 401 Unauthorized
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(["error" => "Token ha expirado"]);
+            exit;
+        } catch (\Exception $e) {
+            // Cualquier otra excepción
+            header("HTTP/1.1 403 Forbidden");
+            echo json_encode(["error" => "Token inválido"]);
+            exit;
+        }
+    }
+}
+
+?>

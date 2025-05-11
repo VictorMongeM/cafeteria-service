@@ -1,0 +1,7 @@
+// curl
+
+curl --location "http://localhost:8080/api/empleados/obtenerTodos" \ --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU5NDg5NzQsImV4cCI6MTc0NTk1MjU3NCwiZGF0YSI6eyJ1c2VyX2lkIjoxMjMsInJvbGUiOiJhZG1pbiJ9fQ.B5B9s7JelWiZouoY3CnvpEoVhF-0nt2I-UIAzIQFg5A"
+
+curl --location "http://localhost:8080/api/empleados/ordenarPorPuestos/3" \ --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU5NDg5NzQsImV4cCI6MTc0NTk1MjU3NCwiZGF0YSI6eyJ1c2VyX2lkIjoxMjMsInJvbGUiOiJhZG1pbiJ9fQ.B5B9s7JelWiZouoY3CnvpEoVhF-0nt2I-UIAzIQFg5A"
+
+curl --location "http://localhost:8080/api/empleados/obtenerPorId/2" \ --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU5NDg5NzQsImV4cCI6MTc0NTk1MjU3NCwiZGF0YSI6eyJ1c2VyX2lkIjoxMjMsInJvbGUiOiJhZG1pbiJ9fQ.B5B9s7JelWiZouoY3CnvpEoVhF-0nt2I-UIAzIQFg5A"
