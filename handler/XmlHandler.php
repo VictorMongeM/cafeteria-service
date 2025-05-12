@@ -11,7 +11,7 @@ class XmlHandler {
          * @param array $data El array de datos que se convertirá en XML. Puede ser un array asociativo o un array multidimensional.
          * @param SimpleXMLElement $xml El objeto SimpleXMLElement al que se agregarán los datos.
          * @param string|null $childElement (Opcional) El nombre del elemento hijo que se usará para los elementos del array.
-         *
+         * @return string El XML
          * Comportamiento:
          * - Si $data es un array multidimensional (es decir, un array de arrays), se itera sobre cada elemento del array.
          *   - Para cada elemento, se crea un nodo hijo en el XML con el nombre especificado en $childElement o 'item' por defecto.

@@ -49,7 +49,7 @@ class AuthMiddleware {
     }
 }
  
-echo json_encode([
-    'token' => $token
-]);
+//echo json_encode([
+//    'token' => $token
+//]);
 ?>
